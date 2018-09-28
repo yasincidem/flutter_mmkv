@@ -29,7 +29,7 @@ class _MyAppState extends State<MyApp> {
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
       rootDir = await FlutterMmkv.getRootDir();
-
+      mystring = await FlutterMmkv.decodeString("mystring");
 
     } on PlatformException {
       rootDir = 'Failed to get';
@@ -63,7 +63,7 @@ class _MyAppState extends State<MyApp> {
         body: Column(
           children: [
             Text('Root Directory : $_rootDir\n'),
-            Text('MMKV String :${FlutterMmkv.decodeString("mystring")}'),
+            Text('MMKV String :$_mystring'),
             TextField(
               controller: myController,
             )
@@ -73,6 +73,11 @@ class _MyAppState extends State<MyApp> {
           child: IconButton(icon: Icon(Icons.add), onPressed: null),
           onPressed: () {
             FlutterMmkv.encodeString("mystring", myController.text.toString());
+            FlutterMmkv.decodeString("mystring").then((value) {
+              this.setState(() {
+                _mystring = value;
+              });
+            });
           }),
       ),
     );
