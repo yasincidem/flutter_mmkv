@@ -62,23 +62,47 @@ class _MyAppState extends State<MyApp> {
         ),
         body: Column(
           children: [
-            Text('Root Directory : $_rootDir\n'),
-            Text('MMKV String :$_mystring'),
-            TextField(
-              controller: myController,
+            Column(
+              children: <Widget>[
+                Text('Root Directory : $_rootDir\n'),
+                Text('MMKV String :$_mystring'),
+                TextField(
+                  controller: myController,
+                ),
+                ButtonTheme.bar(
+                  child: ButtonBar(
+                    alignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      RaisedButton(
+                        onPressed: (){
+                          FlutterMmkv.encodeString("mystring", myController.text.toString());
+                          FlutterMmkv.decodeString("mystring").then((value) {
+                            this.setState(() {
+                              _mystring = value;
+                            });
+                          });
+                        },
+                        child: Text('Encode'),
+                      ),
+                      RaisedButton(
+                        onPressed: (){
+                          FlutterMmkv.removeAll().then((value) {
+                            FlutterMmkv.decodeString("mystring").then((value) {
+                              this.setState(() {
+                                _mystring = value;
+                              });
+                            });
+                          });
+                        },
+                        child: Text('Remove'),
+                      )
+                    ],
+                  ),
+                )
+              ],
             )
           ]
         ),
-        floatingActionButton: FloatingActionButton(
-          child: IconButton(icon: Icon(Icons.add), onPressed: null),
-          onPressed: () {
-            FlutterMmkv.encodeString("mystring", myController.text.toString());
-            FlutterMmkv.decodeString("mystring").then((value) {
-              this.setState(() {
-                _mystring = value;
-              });
-            });
-          }),
       ),
     );
   }

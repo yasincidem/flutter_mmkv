@@ -1,10 +1,43 @@
 # flutter_mmkv
 
-A  Flutter plugin to use MMKV
+A Flutter plugin to use MMKV which is an efficient, small mobile key-value storage framework developed by WeChat.
 
-## Getting Started
+MMKV is initialized automatically.
 
-For help getting started with Flutter, view our online
-[documentation](https://flutter.io/).
+## **#Methods**
+getRootDir |
 
-For help on editing plugin code, view the [documentation](https://flutter.io/developing-packages/#edit-plugin-package).
+encodeBool |
+
+encodeInt |
+
+encodeLong |
+
+encodeDouble |
+
+encodeString |
+
+encodeUint8List |
+
+decodeBool |
+
+decodeInt |
+
+decodeLong |
+
+decodeDouble |
+
+decodeString |
+
+decodeUint8List |
+
+removeValueForKey |
+
+removeAll |
+
+containsKey |
+
+
+#Sample App
+
+http://bit.ly/flutter_mmkv

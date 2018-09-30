@@ -1,16 +1,14 @@
 package com.yasincidem.fluttermmkv;
 
-import android.app.Activity;
 import android.content.Context;
+
+import com.tencent.mmkv.MMKV;
 
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
 import io.flutter.plugin.common.PluginRegistry.Registrar;
-import com.tencent.mmkv.MMKV;
-
-import java.util.Map;
 
 /** FlutterMmkvPlugin */
 public class FlutterMmkvPlugin implements MethodCallHandler {
@@ -94,6 +92,17 @@ public class FlutterMmkvPlugin implements MethodCallHandler {
     } else if ("decodeUint8List".equals(call.method)) {
       String key = call.argument("key");
       result.success(kv.decodeBytes(key));
+
+    } else if ("removeValueForKey".equals(call.method)) {
+      String key = call.argument("key");
+      kv.removeValueForKey(key);
+
+    } else if ("removeAll".equals(call.method)) {
+      kv.clearAll();
+
+    } else if ("containsKey".equals(call.method)) {
+      String key = call.argument("key");
+      result.success(kv.containsKey(key));
 
     } else {
       result.notImplemented();
