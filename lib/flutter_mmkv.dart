@@ -99,9 +99,9 @@ class FlutterMmkv {
     return rString;
   }
 
-  static Future<Uint8List> decodeBytes(String key) async {
+  static Future<Uint8List> decodeUint8List(String key) async {
     final Map<String, dynamic> params = <String, dynamic>{'key': key};
-    final Uint8List rBytes = await _channel.invokeMethod('decodeBytes', params);
+    final Uint8List rBytes = await _channel.invokeMethod('decodeUint8List', params);
     return rBytes;
   }
 
